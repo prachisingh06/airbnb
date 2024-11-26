@@ -31,16 +31,21 @@ router.get("/", wrapAsync( async(req,res) =>{
     });
     
     
-    //show route
+//show route
     router.get("/:id", wrapAsync( async(req,res)=>{
       let {id} = req.params;
       const listing = await Listing.findById(id).populate("reviews");
+      if(!listing){
+        req.flash("error","Listing you requested for does not exist! ")
+        res.redirect("/listings");
+      }
          res.render("listings/show.ejs",{listing});
+      
     }));
 
-    //create route
-    router.post("/",
-    validateListing,
+//create route
+ router.post("/",
+ validateListing,
     wrapAsync( async(req,res,next)=>{
     const newListing = new Listing(req.body.listing);
     await newListing.save();
