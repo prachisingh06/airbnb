@@ -47,7 +47,8 @@ const sessionOption ={
 
 app.get("/", async(req,res)=>{
     const allListings = await Listing.find({});
-    res.render("listings/index.ejs",{allListings});
+    // res.render("listings/index.ejs",{allListings});
+    res.send("hhhhhhhhh")
 });
 
 app.use(session(sessionOption));

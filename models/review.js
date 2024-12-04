@@ -19,6 +19,10 @@ const reviewSchema = new Schema({
         require:true,
 
     },
+    author:{
+        type: Schema.Types.ObjectId,
+        ref:"User",
+    },
   
 });
 
